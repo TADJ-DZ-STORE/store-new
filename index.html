@@ -7,67 +7,79 @@
 
 <style>
 body{
-    font-family: Arial;
     margin:0;
-    background:#f4f4f4;
+    font-family: Arial;
+    background:#f1f3f6;
     direction: rtl;
 }
 
+/* الهيدر */
 header{
-    background:#111;
+    background: linear-gradient(135deg,#111,#333);
     color:white;
-    padding:15px;
     text-align:center;
+    padding:20px;
+    font-size:22px;
+    font-weight:bold;
 }
 
+/* المنتجات */
 .container{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    margin:20px;
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    padding:20px;
 }
 
 .product{
     background:white;
-    width:250px;
-    margin:10px;
-    border-radius:10px;
-    box-shadow:0 0 10px #ccc;
+    border-radius:15px;
     overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.product:hover{
+    transform:scale(1.03);
 }
 
 .product img{
     width:100%;
-    height:200px;
+    height:180px;
     object-fit:cover;
 }
 
+.product-content{
+    padding:10px;
+}
+
 .product h3{
-    margin:10px;
+    margin:5px 0;
 }
 
 .product p{
-    margin:10px;
     color:#555;
+    font-size:14px;
 }
 
 .price{
     color:green;
     font-weight:bold;
-    margin:10px;
+    margin:5px 0;
 }
 
 button{
-    background:#111;
-    color:white;
-    border:none;
     width:100%;
     padding:10px;
+    border:none;
+    background:#111;
+    color:white;
     cursor:pointer;
+    border-radius:0 0 15px 15px;
 }
 
 button:hover{
-    background:#333;
+    background:#444;
 }
 
 /* الفورم */
@@ -78,7 +90,7 @@ button:hover{
     left:0;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.7);
+    background:rgba(0,0,0,0.6);
     justify-content:center;
     align-items:center;
 }
@@ -86,73 +98,84 @@ button:hover{
 form{
     background:white;
     padding:20px;
-    border-radius:10px;
+    border-radius:12px;
     width:300px;
 }
 
 form input{
     width:100%;
-    margin:5px 0;
     padding:8px;
+    margin:5px 0;
 }
 
 .close{
     background:red;
+    margin-top:5px;
 }
 </style>
-
 </head>
 
 <body>
 
-<header>
-    <h1>🛒 متجري الإلكتروني</h1>
-</header>
+<header>🛒 متجر إلكتروني احترافي</header>
 
+<!-- 🟢 المنتجات -->
 <div class="container">
 
     <!-- منتج 1 -->
     <div class="product">
-        <img src="https://via.placeholder.com/300" />
-        <h3>منتج 1</h3>
-        <p>وصف بسيط للمنتج</p>
-        <div class="price">2000 دج</div>
-        <button onclick="openForm('منتج 1')">شراء الآن</button>
+        <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db">
+        <div class="product-content">
+            <h3>حذاء رياضي</h3>
+            <p>حذاء مريح للجري والاستخدام اليومي</p>
+            <div class="price">4500 دج</div>
+        </div>
+        <button onclick="openForm('حذاء رياضي')">شراء</button>
     </div>
 
     <!-- منتج 2 -->
     <div class="product">
-        <img src="https://via.placeholder.com/300" />
-        <h3>منتج 2</h3>
-        <p>وصف بسيط للمنتج</p>
-        <div class="price">3500 دج</div>
-        <button onclick="openForm('منتج 2')">شراء الآن</button>
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
+        <div class="product-content">
+            <h3>ساعة يد</h3>
+            <p>ساعة أنيقة بجودة عالية</p>
+            <div class="price">6000 دج</div>
+        </div>
+        <button onclick="openForm('ساعة يد')">شراء</button>
+    </div>
+
+    <!-- منتج 3 -->
+    <div class="product">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f">
+        <div class="product-content">
+            <h3>سماعات</h3>
+            <p>صوت نقي وجودة عالية</p>
+            <div class="price">3000 دج</div>
+        </div>
+        <button onclick="openForm('سماعات')">شراء</button>
     </div>
 
 </div>
 
-<!-- الفورم -->
+<!-- 🟡 نموذج الطلب -->
 <div id="formBox">
-    <form onsubmit="sendOrder(event)">
-        <h3 id="productName">طلب المنتج</h3>
+<form onsubmit="sendOrder(event)">
+    <h3 id="productName">طلب المنتج</h3>
 
-        <input type="text" placeholder="الاسم الكامل" required>
-        <input type="text" placeholder="رقم الهاتف" required>
-        <input type="text" placeholder="الولاية" required>
-        <input type="text" placeholder="البلدية" required>
-        <input type="text" placeholder="العنوان" required>
+    <input type="text" placeholder="الاسم الكامل" required>
+    <input type="text" placeholder="رقم الهاتف" required>
+    <input type="text" placeholder="الولاية" required>
+    <input type="text" placeholder="البلدية" required>
+    <input type="text" placeholder="العنوان الكامل" required>
 
-        <button type="submit">تأكيد الطلب</button>
-        <button type="button" class="close" onclick="closeForm()">إغلاق</button>
-    </form>
+    <button type="submit">تأكيد الطلب</button>
+    <button type="button" class="close" onclick="closeForm()">إغلاق</button>
+</form>
 </div>
 
 <script>
-let selectedProduct = "";
-
-function openForm(product){
-    selectedProduct = product;
-    document.getElementById("productName").innerText = "طلب: " + product;
+function openForm(name){
+    document.getElementById("productName").innerText = "طلب: " + name;
     document.getElementById("formBox").style.display = "flex";
 }
 
@@ -160,12 +183,10 @@ function closeForm(){
     document.getElementById("formBox").style.display = "none";
 }
 
-function sendOrder(event){
-    event.preventDefault();
-
-    alert("تم إرسال الطلب بنجاح 👍");
-
-    document.getElementById("formBox").style.display = "none";
+function sendOrder(e){
+    e.preventDefault();
+    alert("تم إرسال الطلب بنجاح ✅");
+    closeForm();
 }
 </script>
 
