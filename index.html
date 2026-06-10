@@ -6,29 +6,119 @@
 <title>DZ STORE</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#0f0f10;color:white;direction:rtl}
-header{padding:20px;text-align:center;background:#000;font-size:26px}
+body{
+margin:0;
+font-family:Arial;
+background:#0f0f10;
+color:white;
+direction:rtl;
+}
 
+/* هيدر فاخر */
+header{
+background:#000;
+padding:22px;
+text-align:center;
+font-size:26px;
+font-weight:bold;
+letter-spacing:2px;
+border-bottom:1px solid #222;
+}
+
+/* المنتجات */
 .container{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
 gap:15px;
 padding:20px;
 }
 
 .card{
-background:#1b1b1d;
-border-radius:12px;
+background:#161618;
+border:1px solid #222;
+border-radius:15px;
 overflow:hidden;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.03);
+border-color:#555;
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card-body{
+padding:10px;
+}
+
+.price{
+color:#00ff88;
+font-weight:bold;
+}
+
+/* زر */
+button{
+width:100%;
+padding:10px;
+border:none;
+cursor:pointer;
+background:#fff;
+color:#000;
+font-weight:bold;
+}
+
+button:hover{
+background:#00ff88;
+}
+
+/* الفورم */
+#overlay{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+form{
+background:#111;
+padding:15px;
+border-radius:12px;
+width:340px;
+border:1px solid #333;
+}
+
+input,select{
+width:100%;
+padding:9px;
+margin:6px 0;
+border:none;
+border-radius:6px;
+background:#1c1c1f;
+color:white;
+}
+
+.btn{
+width:100%;
+padding:10px;
+border:none;
+color:black;
+background:#00ff88;
+font-weight:bold;
 cursor:pointer;
 }
 
-img{width:100%;height:180px;object-fit:cover}
-
-.card-body{padding:10px}
-.price{color:#00ff88;font-weight:bold}
-
-a{text-decoration:none;color:white}
+.close{
+background:red;
+color:white;
+}
 </style>
 </head>
 
@@ -36,35 +126,138 @@ a{text-decoration:none;color:white}
 
 <header>🛒 DZ STORE</header>
 
-<a href="admin.html" style="display:block;text-align:center;color:#00ff88;margin:10px">
-⚙ الدخول إلى لوحة التحكم
-</a>
+<div class="container">
 
-<div class="container" id="box"></div>
+<!-- منتج 1 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
+<div class="card-body">
+<h3>ساعة فاخرة</h3>
+<p>تصميم أنيق وعصري</p>
+<div class="price">6000 دج</div>
+</div>
+<button onclick="openOrder('ساعة فاخرة',6000)">شراء</button>
+</div>
 
-<script src="products.js"></script>
+<!-- منتج 2 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db">
+<div class="card-body">
+<h3>حذاء رياضي</h3>
+<p>راحة وجودة عالية</p>
+<div class="price">4500 دج</div>
+</div>
+<button onclick="openOrder('حذاء رياضي',4500)">شراء</button>
+</div>
+
+</div>
+
+<!-- الفورم -->
+<div id="overlay">
+<form onsubmit="sendOrder(event)">
+
+<h3 id="title">طلب المنتج</h3>
+
+<input id="name" placeholder="الاسم الكامل" required>
+<input id="phone" placeholder="رقم الهاتف" required>
+
+<select id="wilaya" required>
+<option value="">اختر الولاية</option>
+</select>
+
+<input id="city" placeholder="اكتب البلدية" required>
+
+<input id="address" placeholder="العنوان الكامل" required>
+
+<!-- 🔢 كمية -->
+<input id="qty" type="number" min="1" value="1" placeholder="الكمية">
+
+<select id="delivery">
+<option>توصيل للمنزل</option>
+<option>استلام من المكتب</option>
+</select>
+
+<button class="btn" type="submit">تأكيد الطلب عبر WhatsApp</button>
+<button class="btn close" type="button" onclick="closeOrder()">إغلاق</button>
+
+</form>
+</div>
 
 <script>
-let box=document.getElementById("box");
 
-function render(){
-box.innerHTML="";
-products.forEach(p=>{
-box.innerHTML+=`
-<a href="product.html?id=${p.id}">
-<div class="card">
-<img src="${p.img}">
-<div class="card-body">
-<h3>${p.name}</h3>
-<p>${p.desc}</p>
-<div class="price">${p.price} دج</div>
-</div>
-</div>
-</a>
-`;
-});
+let productName="";
+let productPrice=0;
+
+/* فتح الطلب */
+function openOrder(name,price){
+productName=name;
+productPrice=price;
+
+document.getElementById("title").innerText=
+"طلب: "+name+" - "+price+" دج";
+
+document.getElementById("overlay").style.display="flex";
 }
-render();
+
+/* إغلاق */
+function closeOrder(){
+document.getElementById("overlay").style.display="none";
+}
+
+/* WhatsApp */
+function sendOrder(e){
+e.preventDefault();
+
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let wilaya=document.getElementById("wilaya").value;
+let city=document.getElementById("city").value;
+let address=document.getElementById("address").value;
+let qty=document.getElementById("qty").value;
+let delivery=document.getElementById("delivery").value;
+
+/* 🔥 رسالة واضحة 100% */
+let msg=
+`🛒 DZ STORE - طلب جديد
+
+📦 المنتج: ${productName}
+💰 سعر الوحدة: ${productPrice} دج
+🔢 الكمية: ${qty}
+💵 المجموع: ${productPrice * qty} دج
+
+👤 الاسم: ${name}
+📞 الهاتف: ${phone}
+🏙 الولاية: ${wilaya}
+🏘 البلدية: ${city}
+📍 العنوان: ${address}
+🚚 التوصيل: ${delivery}`;
+
+let number="213XXXXXXXXX";
+
+window.open("https://wa.me/"+number+"?text="+encodeURIComponent(msg),"_blank");
+
+closeOrder();
+}
+
+/* تحميل الولايات */
+const wilayas=[
+"أدرار","الشلف","الأغواط","أم البواقي","باتنة","بجاية","بسكرة","بشار",
+"البليدة","البويرة","تمنراست","تبسة","تلمسان","تيارت","تيزي وزو","الجزائر",
+"الجلفة","جيجل","سطيف","سعيدة","سكيكدة","سيدي بلعباس","عنابة","قالمة",
+"قسنطينة","المدية","مستغانم","المسيلة","معسكر","ورقلة","وهران","البيض",
+"إليزي","برج بوعريريج","بومرداس","الطارف","تندوف","تيسمسيلت","الوادي",
+"خنشلة","سوق أهراس","تيبازة","ميلة","عين الدفلى","النعامة","عين تيموشنت",
+"غرداية","غليزان"
+];
+
+let w=document.getElementById("wilaya");
+
+wilayas.forEach(x=>{
+let o=document.createElement("option");
+o.textContent=x;
+w.appendChild(o);
+});
+
 </script>
 
 </body>
