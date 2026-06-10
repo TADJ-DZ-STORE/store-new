@@ -1,163 +1,66 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DZ STORE</title>
-
+<title>DZ STORE PREMIUM</title>
 <style>
-body{
-margin:0;
-font-family:Arial;
-background:#0f0f10;
-color:white;
-direction:rtl;
-}
-
-/* هيدر فاخر */
-header{
-background:#000;
-padding:22px;
-text-align:center;
-font-size:26px;
-font-weight:bold;
-letter-spacing:2px;
-border-bottom:1px solid #222;
-}
-
-/* المنتجات */
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-gap:15px;
-padding:20px;
-}
-
-.card{
-background:#161618;
-border:1px solid #222;
-border-radius:15px;
-overflow:hidden;
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.03);
-border-color:#555;
-}
-
-.card img{
-width:100%;
-height:180px;
-object-fit:cover;
-}
-
-.card-body{
-padding:10px;
-}
-
-.price{
-color:#00ff88;
-font-weight:bold;
-}
-
-/* زر */
-button{
-width:100%;
-padding:10px;
-border:none;
-cursor:pointer;
-background:#fff;
-color:#000;
-font-weight:bold;
-}
-
-button:hover{
-background:#00ff88;
-}
-
-/* الفورم */
-#overlay{
-display:none;
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.8);
-justify-content:center;
-align-items:center;
-}
-
-form{
-background:#111;
-padding:15px;
-border-radius:12px;
-width:340px;
-border:1px solid #333;
-}
-
-input,select{
-width:100%;
-padding:9px;
-margin:6px 0;
-border:none;
-border-radius:6px;
-background:#1c1c1f;
-color:white;
-}
-
-.btn{
-width:100%;
-padding:10px;
-border:none;
-color:black;
-background:#00ff88;
-font-weight:bold;
-cursor:pointer;
-}
-
-.close{
-background:red;
-color:white;
-}
+body{margin:0;background:#0b0b0b;color:#fff;font-family:Arial}
+.hero{padding:30px;text-align:center;background:linear-gradient(180deg,#000,#161616)}
+.logo{font-size:34px;font-weight:bold;color:#00ff88}
+.tag{margin-top:10px;color:#ccc}
+.product{max-width:900px;margin:auto;padding:20px}
+.main-img{width:100%;height:380px;object-fit:cover;border-radius:15px}
+.gallery{display:flex;gap:10px;margin-top:10px;overflow:auto}
+.gallery img{width:100px;height:100px;object-fit:cover;border-radius:10px}
+.price-old{text-decoration:line-through;color:#888}
+.price-new{font-size:38px;color:#00ff88;font-weight:bold}
+.badge{background:red;padding:8px 12px;border-radius:8px;display:inline-block}
+.rating{color:gold;font-size:20px}
+.timer{background:#111;padding:15px;border-radius:10px;margin:15px 0;text-align:center;font-size:24px}
+.features{background:#111;padding:15px;border-radius:10px;line-height:2}
+form{background:#111;padding:20px;border-radius:15px;margin-top:20px}
+input,select{width:100%;padding:12px;margin:6px 0;background:#1b1b1b;color:#fff;border:none;border-radius:8px;box-sizing:border-box}
+button{width:100%;padding:14px;background:#00ff88;border:none;font-weight:bold;border-radius:8px;cursor:pointer}
+.total{font-size:22px;color:#00ff88;text-align:center;margin:10px 0}
+video{width:100%;border-radius:15px;margin-top:15px}
 </style>
 </head>
-
 <body>
+<div class="hero">
+<div class="logo">DZ STORE</div>
+<div class="tag">الدفع عند الاستلام | توصيل لجميع الولايات</div>
+</div>
 
-<header>🛒 DZ STORE</header>
+<div class="product">
+<img class="main-img" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
 
-<div class="container">
-
-<!-- منتج 1 -->
-<div class="card">
+<div class="gallery">
 <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
-<div class="card-body">
-<h3>ساعة فاخرة</h3>
-<p>تصميم أنيق وعصري</p>
-<div class="price">6000 دج</div>
-</div>
-<button onclick="openOrder('ساعة فاخرة',6000)">شراء</button>
+<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff">
+<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e">
 </div>
 
-<!-- منتج 2 -->
-<div class="card">
-<img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db">
-<div class="card-body">
-<h3>حذاء رياضي</h3>
-<p>راحة وجودة عالية</p>
-<div class="price">4500 دج</div>
-</div>
-<button onclick="openOrder('حذاء رياضي',4500)">شراء</button>
+<h1>المنتج المميز</h1>
+<div class="rating">⭐⭐⭐⭐⭐ 4.9/5</div>
+<div class="price-old">5000 دج</div>
+<div class="price-new">3500 دج</div>
+<div class="badge">🔥 تخفيض 30%</div>
+
+<div class="timer" id="timer"></div>
+
+<div class="features">
+✅ جودة ممتازة<br>
+✅ الدفع عند الاستلام<br>
+✅ توصيل سريع 58 ولاية<br>
+✅ ضمان الاستبدال عند وجود عيب
 </div>
 
-</div>
+<video controls>
+<source src="" type="video/mp4">
+</video>
 
-<!-- الفورم -->
-<div id="overlay">
 <form onsubmit="sendOrder(event)">
-
-<h3 id="title">طلب المنتج</h3>
-
 <input id="name" placeholder="الاسم الكامل" required>
 <input id="phone" placeholder="رقم الهاتف" required>
 
@@ -165,100 +68,52 @@ color:white;
 <option value="">اختر الولاية</option>
 </select>
 
-<input id="city" placeholder="اكتب البلدية" required>
-
+<input id="city" placeholder="البلدية" required>
 <input id="address" placeholder="العنوان الكامل" required>
 
-<!-- 🔢 كمية -->
-<input id="qty" type="number" min="1" value="1" placeholder="الكمية">
+<input id="qty" type="number" value="1" min="1" oninput="calc()">
 
-<select id="delivery">
-<option>توصيل للمنزل</option>
-<option>استلام من المكتب</option>
-</select>
+<div class="total" id="total">المجموع: 3500 دج</div>
 
-<button class="btn" type="submit">تأكيد الطلب عبر WhatsApp</button>
-<button class="btn close" type="button" onclick="closeOrder()">إغلاق</button>
-
+<button type="submit">🛒 اطلب الآن عبر WhatsApp</button>
 </form>
 </div>
 
 <script>
+const price=3500;
 
-let productName="";
-let productPrice=0;
-
-/* فتح الطلب */
-function openOrder(name,price){
-productName=name;
-productPrice=price;
-
-document.getElementById("title").innerText=
-"طلب: "+name+" - "+price+" دج";
-
-document.getElementById("overlay").style.display="flex";
+function calc(){
+total.innerHTML='المجموع: '+(qty.value*price)+' دج';
 }
 
-/* إغلاق */
-function closeOrder(){
-document.getElementById("overlay").style.display="none";
-}
-
-/* WhatsApp */
 function sendOrder(e){
 e.preventDefault();
 
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let wilaya=document.getElementById("wilaya").value;
-let city=document.getElementById("city").value;
-let address=document.getElementById("address").value;
-let qty=document.getElementById("qty").value;
-let delivery=document.getElementById("delivery").value;
+let msg=`🛒 طلب جديد - DZ STORE
 
-/* 🔥 رسالة واضحة 100% */
-let msg=
-`🛒 DZ STORE - طلب جديد
+📦 المنتج: المنتج المميز
+💰 سعر الوحدة: ${price} دج
+🔢 الكمية: ${qty.value}
+💵 المجموع: ${qty.value*price} دج
 
-📦 المنتج: ${productName}
-💰 سعر الوحدة: ${productPrice} دج
-🔢 الكمية: ${qty}
-💵 المجموع: ${productPrice * qty} دج
+👤 الاسم: ${name.value}
+📞 الهاتف: ${phone.value}
+🏙 الولاية: ${wilaya.value}
+🏘 البلدية: ${city.value}
+📍 العنوان: ${address.value}`;
 
-👤 الاسم: ${name}
-📞 الهاتف: ${phone}
-🏙 الولاية: ${wilaya}
-🏘 البلدية: ${city}
-📍 العنوان: ${address}
-🚚 التوصيل: ${delivery}`;
-
-let number="213775123025";
-
-window.open("https://wa.me/"+number+"?text="+encodeURIComponent(msg),"_blank");
-
-closeOrder();
+window.open('https://wa.me/213775123025?text='+encodeURIComponent(msg),'_blank');
 }
 
-/* تحميل الولايات */
-const wilayas=[
-"أدرار","الشلف","الأغواط","أم البواقي","باتنة","بجاية","بسكرة","بشار",
-"البليدة","البويرة","تمنراست","تبسة","تلمسان","تيارت","تيزي وزو","الجزائر",
-"الجلفة","جيجل","سطيف","سعيدة","سكيكدة","سيدي بلعباس","عنابة","قالمة",
-"قسنطينة","المدية","مستغانم","المسيلة","معسكر","ورقلة","وهران","البيض",
-"إليزي","برج بوعريريج","بومرداس","الطارف","تندوف","تيسمسيلت","الوادي",
-"خنشلة","سوق أهراس","تيبازة","ميلة","عين الدفلى","النعامة","عين تيموشنت",
-"غرداية","غليزان"
-];
+const wilayas=["أدرار","الشلف","الأغواط","أم البواقي","باتنة","بجاية","بسكرة","بشار","البليدة","البويرة","تمنراست","تبسة","تلمسان","تيارت","تيزي وزو","الجزائر","الجلفة","جيجل","سطيف","سعيدة","سكيكدة","سيدي بلعباس","عنابة","قالمة","قسنطينة","المدية","مستغانم","المسيلة","معسكر","ورقلة","وهران","البيض","إليزي","برج بوعريريج","بومرداس","الطارف","تندوف","تيسمسيلت","الوادي","خنشلة","سوق أهراس","تيبازة","ميلة","عين الدفلى","النعامة","عين تيموشنت","غرداية","غليزان"];
+wilayas.forEach(w=>{let o=document.createElement('option');o.textContent=w;wilaya.appendChild(o);});
 
-let w=document.getElementById("wilaya");
-
-wilayas.forEach(x=>{
-let o=document.createElement("option");
-o.textContent=x;
-w.appendChild(o);
-});
-
+let time=18000;
+setInterval(()=>{
+let h=Math.floor(time/3600),m=Math.floor((time%3600)/60),s=time%60;
+timer.innerHTML='⏰ العرض ينتهي خلال '+String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+if(time>0)time--;
+},1000);
 </script>
-
 </body>
 </html>
