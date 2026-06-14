@@ -1,202 +1,114 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>👑 DZ STORE</title>
 
-<link rel="stylesheet" href="style.css">
-</head>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<body>
+<style>
 
-<!-- TOP BAR -->
-<div class="topbar">
-🚚 توصيل إلى 58 ولاية | 💵 الدفع عند الاستلام | ✅ منتجات مختارة
-</div>
-
-<!-- HEADER -->
-<header>
-
-<div class="logo-area">
-
-<div class="crown">👑</div>
-
-<div class="logo-text">
-DZ STORE
-</div>
-
-</div>
-
-<div class="search-area">
-
-<input
-type="text"
-id="searchInput"
-placeholder="ابحث عن منتج..."
->
-
-<select id="categoryFilter">
-
-<option value="all">كل التصنيفات</option>
-
-<option value="electronics">إلكترونيات</option>
-
-<option value="home">منزل</option>
-
-<option value="accessories">إكسسوارات</option>
-
-<option value="sport">رياضة</option>
-
-<option value="car">سيارات</option>
-
-<option value="beauty">جمال</option>
-
-</select>
-
-</div>
-
-</header>
-
-<!-- SLIDER -->
-<section class="slider">
-
-<div class="slide active">
-<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200">
-</div>
-
-<div class="slide">
-<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200">
-</div>
-
-<div class="slide">
-<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200">
-</div>
-
-</section>
-
-<!-- PRODUCTS -->
-<section class="products-section">
-
-<h2>
-🔥 المنتجات
-</h2>
-
-<div id="productsContainer" class="products-grid"></div>
-
-</section>
-
-<!-- IMAGE POPUP -->
-<div id="imageModal" class="modal">
-
-<span class="close-modal">&times;</span>
-
-<img id="modalImage">
-
-</div>
-
-<!-- ORDER POPUP -->
-<div id="orderPopup" class="popup">
-
-<div class="popup-content">
-
-<h3>إتمام الطلب</h3>
-
-<input id="customerName" placeholder="الاسم الكامل">
-
-<input id="customerPhone" placeholder="رقم الهاتف">
-
-<select id="customerWilaya"></select>
-
-<input id="customerAddress" placeholder="العنوان">
-
-<input id="customerQty" type="number" value="1" min="1">
-
-<button onclick="sendOrder()">
-إرسال الطلب
-</button>
-
-<button onclick="closeOrderPopup()">
-إغلاق
-</button>
-
-</div>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Cairo',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-background:#0b0b0b;
-color:white;
+background:#0f1115;
+color:#fff;
+overflow-x:hidden;
 }
 
-.topbar{
-background:#00e676;
+/* TOP BAR */
+
+.top-bar{
+background:#00d26a;
 color:#000;
+font-weight:700;
 padding:10px;
 text-align:center;
-font-weight:bold;
+font-size:14px;
 }
+
+/* HEADER */
 
 header{
-background:#111;
-padding:20px;
+position:sticky;
+top:0;
+z-index:999;
+background:#11151d;
+border-bottom:1px solid #1f2937;
+padding:15px;
+}
+
+.logo-box{
 display:flex;
 flex-direction:column;
-gap:15px;
+align-items:center;
+justify-content:center;
 }
 
-.logo-area{
-text-align:center;
-}
-
-.crown{
-font-size:40px;
+.logo-icon{
+font-size:42px;
 }
 
 .logo-text{
 font-size:28px;
-font-weight:bold;
+font-weight:800;
 color:#00e676;
+letter-spacing:2px;
 }
 
-.search-area{
+/* NAV */
+
+.nav{
 display:flex;
-gap:10px;
+justify-content:center;
+gap:15px;
+margin-top:15px;
 flex-wrap:wrap;
 }
 
-.search-area input,
-.search-area select{
-flex:1;
-padding:12px;
-border:none;
-border-radius:10px;
+.nav a{
+color:white;
+text-decoration:none;
+padding:8px 14px;
+border-radius:8px;
+transition:.3s;
 }
 
-.slider{
-height:400px;
-overflow:hidden;
+.nav a:hover{
+background:#00e676;
+color:#000;
+}
+
+/* HERO */
+
+.hero{
 position:relative;
+height:450px;
+overflow:hidden;
 }
 
 .slide{
-display:none;
+position:absolute;
+width:100%;
 height:100%;
+opacity:0;
+transition:1s;
 }
 
 .slide.active{
-display:block;
+opacity:1;
 }
 
 .slide img{
@@ -205,186 +117,113 @@ height:100%;
 object-fit:cover;
 }
 
-.products-section{
-padding:30px;
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.45);
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
 }
 
-.products-grid{
-display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+.hero-content h1{
+font-size:42px;
+margin-bottom:10px;
 }
 
-.card{
-background:#181818;
-border-radius:15px;
-overflow:hidden;
-transition:.3s;
+.hero-content p{
+font-size:18px;
+margin-bottom:20px;
+color:#ddd;
 }
 
-.card:hover{
-transform:translateY(-5px);
-}
-
-.card img{
-width:100%;
-height:250px;
-object-fit:cover;
-cursor:pointer;
-}
-
-.card-content{
-padding:15px;
-}
-
-.price{
-color:#00e676;
-font-size:22px;
+.hero-btn{
+background:#00e676;
+color:#000;
+padding:12px 25px;
+border-radius:10px;
+text-decoration:none;
 font-weight:bold;
 }
 
-.old-price{
-text-decoration:line-through;
-color:#777;
+/* SECTION TITLE */
+
+.section-title{
+text-align:center;
+font-size:30px;
+font-weight:800;
+margin:40px 0 20px;
+color:#00e676;
 }
 
-.order-btn{
-width:100%;
-padding:12px;
-background:#25D366;
-border:none;
-border-radius:10px;
-color:white;
-cursor:pointer;
-margin-top:10px;
-}
+</style>
+</head>
 
-.modal{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.9);
-justify-content:center;
-align-items:center;
-}
+<body>
 
-.modal img{
-max-width:90%;
-max-height:90%;
-}
+<div class="top-bar">
+🚚 توصيل إلى 58 ولاية | 💵 الدفع عند الاستلام | ✅ منتجات مختارة بعناية
+</div>
 
-.popup{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.8);
-justify-content:center;
-align-items:center;
-}
+<header>
 
-.popup-content{
-background:#111;
-padding:20px;
-border-radius:15px;
-width:90%;
-max-width:400px;
-}
+<div class="logo-box">
 
-.popup-content input,
-.popup-content select{
-width:100%;
-padding:12px;
-margin:8px 0;
-border:none;
-border-radius:8px;
-}
+<div class="logo-icon">👑</div>
 
-.popup-content button{
-width:100%;
-padding:12px;
-margin-top:10px;
-const products = [
+<div class="logo-text">
+DZ STORE
+</div>
 
-{
-name:"Smart Watch",
-category:"electronics",
-price:3500,
-oldPrice:4500,
-image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500",
-description:"ساعة ذكية متعددة الوظائف"
-},
+</div>
 
-{
-name:"Wireless Headphones",
-category:"electronics",
-price:5500,
-oldPrice:7000,
-image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500",
-description:"سماعات بلوتوث احترافية"
-},
+<div class="nav">
 
-{
-name:"Mini Blender",
-category:"home",
-price:4500,
-oldPrice:6000,
-image:"https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=500",
-description:"خلاط محمول"
+<a href="#products">المنتجات</a>
 
-}
+<a href="#categories">التصنيفات</a>
 
-];
-}
-const wilayas = [
-"أدرار","الشلف","الأغواط","أم البواقي","باتنة",
-"بجاية","بسكرة","بشار","البليدة","البويرة",
-"تمنراست","تبسة","تلمسان","تيارت","تيزي وزو",
-"الجزائر","الجلفة","جيجل","سطيف","سعيدة",
-"سكيكدة","سيدي بلعباس","عنابة","قالمة","قسنطينة",
-"المدية","مستغانم","المسيلة","معسكر","ورقلة",
-"وهران","البيض","إليزي","برج بوعريريج","بومرداس",
-"الطارف","تندوف","تيسمسيلت","الوادي","خنشلة",
-"سوق أهراس","تيبازة","ميلة","عين الدفلى","النعامة",
-"عين تموشنت","غرداية","غليزان","تيميمون",
-"برج باجي مختار","أولاد جلال","بني عباس",
-"عين صالح","عين قزام","تقرت","جانت",
-"المغير","المنيعة"
-];
-let selectedProduct = null;
+<a href="#about">من نحن</a>
 
-function openOrder(product){
-selectedProduct = product;
-document.getElementById("orderPopup").style.display="flex";
-}
+<a href="#contact">اتصل بنا</a>
 
-function closeOrderPopup(){
-document.getElementById("orderPopup").style.display="none";
-}
+</div>
 
-function sendOrder(){
+</header>
 
-const msg =
-`🛒 طلب جديد - DZ STORE
+<section class="hero">
 
-📦 المنتج: ${selectedProduct.name}
+<div class="slide active">
+<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1400">
+</div>
 
-💰 السعر: ${selectedProduct.price} دج
+<div class="slide">
+<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1400">
+</div>
 
-👤 الاسم: ${customerName.value}
+<div class="slide">
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1400">
+</div>
 
-📞 الهاتف: ${customerPhone.value}
+<div class="overlay">
 
-🏙 الولاية: ${customerWilaya.value}
+<div class="hero-content">
 
-📍 العنوان: ${customerAddress.value}
+<h1>مرحباً بك في DZ STORE</h1>
 
-🔢 الكمية: ${customerQty.value}`;
+<p>
+أفضل العروض والمنتجات مع التوصيل إلى جميع ولايات الجزائر
+</p>
 
-window.open(
-"https://wa.me/213775123025?text="+encodeURIComponent(msg),
-"_blank"
+<a href="#products" class="hero-btn">
+تسوق الآن
+</a>
 
-);
+</div>
 
-}
+</div>
+
+  </section>
+  
