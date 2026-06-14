@@ -8,6 +8,7 @@
 
 <style>
 
+/* RESET */
 *{
 margin:0;
 padding:0;
@@ -16,37 +17,46 @@ font-family:Arial;
 }
 
 body{
-background:#0b0f14;
+background:#0e1117;
 color:white;
 }
 
 /* HEADER */
 header{
-padding:15px;
-text-align:center;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
 position:sticky;
 top:0;
 z-index:1000;
-border-bottom:1px solid #1f2a36;
+background:#0b0f14;
+padding:15px;
+border-bottom:1px solid #1f2937;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
 .logo{
-font-size:26px;
+font-size:22px;
 font-weight:bold;
 color:#00ff88;
 }
 
-/* HERO */
+.search{
+width:50%;
+padding:10px;
+border-radius:10px;
+border:none;
+outline:none;
+}
+
+/* HERO SMALL */
 .hero{
-padding:70px 20px;
+padding:40px 20px;
 text-align:center;
-background:linear-gradient(180deg,#0b0f14,#0c1118);
+background:linear-gradient(180deg,#0b0f14,#0e1117);
 }
 
 .hero h1{
-font-size:40px;
+font-size:34px;
 margin-bottom:10px;
 }
 
@@ -54,7 +64,7 @@ margin-bottom:10px;
 color:#aaa;
 }
 
-/* PRODUCTS */
+/* PRODUCTS GRID */
 .container{
 max-width:1200px;
 margin:auto;
@@ -63,15 +73,14 @@ padding:20px;
 
 .products{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:18px;
-margin-top:20px;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:15px;
 }
 
 /* CARD */
 .card{
-background:#121823;
-border:1px solid #1e2a38;
+background:#111827;
+border:1px solid #1f2937;
 border-radius:15px;
 overflow:hidden;
 transition:0.3s;
@@ -84,32 +93,30 @@ border-color:#00ff88;
 
 .card img{
 width:100%;
-height:220px;
+height:200px;
 object-fit:cover;
-cursor:pointer;
 }
 
 .info{
-padding:15px;
+padding:12px;
 }
 
 .price{
 color:#00ff88;
-font-size:20px;
+font-size:18px;
+margin:8px 0;
 font-weight:bold;
-margin:10px 0;
 }
 
-/* BUTTON */
 .btn{
 display:block;
 text-align:center;
-padding:12px;
+padding:10px;
 background:#00ff88;
-color:#000;
-font-weight:bold;
+color:black;
 border-radius:10px;
 text-decoration:none;
+font-weight:bold;
 cursor:pointer;
 }
 
@@ -121,22 +128,21 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,0.85);
 justify-content:center;
 align-items:center;
-z-index:9999;
 }
 
-.popup-box{
-background:#111826;
+.box{
+background:#111827;
 padding:20px;
 border-radius:15px;
 width:90%;
 max-width:400px;
 }
 
-.popup-box input,
-.popup-box select{
+.box input,
+.box select{
 width:100%;
 padding:10px;
 margin:8px 0;
@@ -144,21 +150,19 @@ border:none;
 border-radius:8px;
 }
 
-.popup-box button{
+.box button{
 width:100%;
 padding:12px;
 background:#00ff88;
 border:none;
 border-radius:10px;
 font-weight:bold;
-cursor:pointer;
 }
 
 .close{
 text-align:right;
-cursor:pointer;
 color:red;
-font-size:18px;
+cursor:pointer;
 }
 
 </style>
@@ -169,30 +173,31 @@ font-size:18px;
 
 <header>
 <div class="logo">👑 DE STORE</div>
+<input class="search" placeholder="ابحث عن منتج..." onkeyup="search(this.value)">
 </header>
 
 <section class="hero">
-<h1>متجر ضخم وسهل الطلب</h1>
-<p>اطلب أي منتج في أقل من 10 ثواني</p>
+<h1>متجر احترافي بسيط وسريع</h1>
+<p>اطلب أي منتج في ثواني</p>
 </section>
 
 <div class="container">
 
-<div id="products" class="products"></div>
+<div class="products" id="products"></div>
 
 </div>
 
-<!-- POPUP ORDER -->
+<!-- POPUP -->
 <div class="popup" id="popup">
 
-<div class="popup-box">
+<div class="box">
 
 <div class="close" onclick="closePopup()">✖</div>
 
 <h3>إتمام الطلب</h3>
 
 <input id="name" placeholder="الاسم">
-<input id="phone" placeholder="رقم الهاتف">
+<input id="phone" placeholder="الهاتف">
 
 <select id="wilaya">
 <option>الجزائر</option>
@@ -204,7 +209,7 @@ font-size:18px;
 
 <input id="address" placeholder="العنوان">
 
-<button onclick="sendOrder()">إرسال عبر واتساب</button>
+<button onclick="send()">إرسال واتساب</button>
 
 </div>
 
@@ -212,78 +217,69 @@ font-size:18px;
 
 <script>
 
-/* PRODUCTS DATABASE */
-const products = [
-
-{
-name:"Smart Watch",
-price:3500,
-image:"images/watch.jpg"
-},
-
-{
-name:"Headphones",
-price:4500,
-image:"images/headphones.jpg"
-},
-
-{
-name:"Mini Blender",
-price:5500,
-image:"images/blender.jpg"
-}
-
+/* PRODUCTS */
+const products=[
+{name:"Smart Watch",price:3500,img:"images/watch.jpg"},
+{name:"Headphones",price:4500,img:"images/headphones.jpg"},
+{name:"Blender",price:5500,img:"images/blender.jpg"}
 ];
 
-/* DISPLAY PRODUCTS */
-let container=document.getElementById("products");
+let selected=null;
 
-products.forEach((p,i)=>{
+/* SHOW */
+function show(list=products){
 
-container.innerHTML+=`
+let box=document.getElementById("products");
+box.innerHTML="";
+
+list.forEach((p,i)=>{
+
+box.innerHTML+=`
 <div class="card">
-<img src="${p.image}">
+<img src="${p.img}">
 <div class="info">
 <h3>${p.name}</h3>
 <div class="price">${p.price} دج</div>
-<button class="btn" onclick="openPopup(${i})">
-Commander
-</button>
+<button class="btn" onclick="openP(${i})">Commander</button>
 </div>
 </div>
 `;
 
 });
 
-let selectedProduct=null;
-
-/* OPEN POPUP */
-function openPopup(index){
-selectedProduct=products[index];
-document.getElementById("popup").style.display="flex";
 }
 
-/* CLOSE */
+show();
+
+/* SEARCH */
+function search(v){
+let res=products.filter(p=>p.name.toLowerCase().includes(v.toLowerCase()));
+show(res);
+}
+
+/* POPUP */
+function openP(i){
+selected=products[i];
+popup.style.display="flex";
+}
+
 function closePopup(){
-document.getElementById("popup").style.display="none";
+popup.style.display="none";
 }
 
-/* SEND ORDER */
-function sendOrder(){
+/* SEND */
+function send(){
 
 let msg=
 "🛒 طلب جديد - DE STORE\n\n"+
-"📦 المنتج: "+selectedProduct.name+"\n"+
-"💰 السعر: "+selectedProduct.price+" دج\n\n"+
-"👤 الاسم: "+document.getElementById("name").value+"\n"+
-"📞 الهاتف: "+document.getElementById("phone").value+"\n"+
-"🏙 الولاية: "+document.getElementById("wilaya").value+"\n"+
-"📍 العنوان: "+document.getElementById("address").value;
+"📦 المنتج: "+selected.name+"\n"+
+"💰 السعر: "+selected.price+"\n\n"+
+"👤 الاسم: "+name.value+"\n"+
+"📞 الهاتف: "+phone.value+"\n"+
+"🏙 الولاية: "+wilaya.value+"\n"+
+"📍 العنوان: "+address.value;
 
-window.open(
-"https://wa.me/213775123025?text="+encodeURIComponent(msg),
-"_blank"
-);
+window.open("https://wa.me/213775123025?text="+encodeURIComponent(msg));
 
 }
 
