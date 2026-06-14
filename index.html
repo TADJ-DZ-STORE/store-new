@@ -8,6 +8,7 @@
 
 <style>
 
+/* RESET */
 *{
 margin:0;
 padding:0;
@@ -16,38 +17,20 @@ font-family:Arial;
 }
 
 body{
-background:#0b0b0b;
 color:white;
+background:#000;
+overflow-x:hidden;
 }
 
-/* HEADER */
-header{
-position:sticky;
-top:0;
-z-index:1000;
-background:rgba(0,0,0,0.95);
-backdrop-filter:blur(10px);
-padding:15px;
-border-bottom:1px solid #00e676;
-}
-
-.logo{
-text-align:center;
-font-size:36px;
-font-weight:bold;
-color:#00e676;
-letter-spacing:2px;
-}
-
-.logo span{
-color:#ffd700;
-}
-
-/* HERO */
+/* HERO FULL SCREEN */
 .hero{
-height:520px;
-background:url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1600&q=80")
-center/cover no-repeat;
+height:100vh;
+width:100%;
+background:
+linear-gradient(120deg, rgba(0,0,0,0.75), rgba(0,0,0,0.4)),
+url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -55,133 +38,98 @@ text-align:center;
 position:relative;
 }
 
-.hero::before{
-content:"";
-position:absolute;
-inset:0;
+/* HEADER */
+header{
+position:fixed;
+top:0;
+width:100%;
+padding:15px;
 background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,0.1);
+z-index:1000;
 }
 
+.logo{
+text-align:center;
+font-size:34px;
+font-weight:bold;
+color:#00ff88;
+letter-spacing:2px;
+}
+
+.logo span{
+color:#ffd700;
+}
+
+/* HERO CONTENT */
 .hero-content{
-position:relative;
-z-index:2;
+max-width:700px;
+padding:20px;
+animation:fadeIn 1.2s ease;
 }
 
 .hero h1{
-font-size:55px;
-margin-bottom:10px;
+font-size:60px;
+margin-bottom:15px;
+text-shadow:0 0 20px rgba(0,255,136,0.3);
 }
 
 .hero p{
 font-size:20px;
 color:#ddd;
-margin-bottom:20px;
+margin-bottom:25px;
 }
 
+/* BUTTON */
 .btn{
 display:inline-block;
-padding:14px 30px;
-background:linear-gradient(135deg,#00e676,#00c853);
-color:black;
+padding:14px 35px;
+background:linear-gradient(135deg,#00ff88,#00c853);
+color:#000;
 font-weight:bold;
 border-radius:12px;
 text-decoration:none;
 transition:0.3s;
+box-shadow:0 0 20px rgba(0,255,136,0.2);
 }
 
 .btn:hover{
-transform:scale(1.05);
+transform:scale(1.08);
+box-shadow:0 0 30px rgba(0,255,136,0.4);
 }
 
-/* CONTAINER */
-.container{
-max-width:1200px;
-margin:auto;
-padding:20px;
+/* ANIMATION */
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
 }
 
-/* SEARCH */
-.search-box{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin:25px 0;
+/* GLOW EFFECT BACKGROUND */
+.hero::after{
+content:"";
+position:absolute;
+width:400px;
+height:400px;
+background:#00ff88;
+filter:blur(150px);
+opacity:0.15;
+border-radius:50%;
+top:20%;
+left:10%;
 }
 
-.search-box input,
-.search-box select{
-flex:1;
-padding:12px;
-border:none;
-border-radius:10px;
+/* MOBILE */
+@media(max-width:768px){
+
+.hero h1{
+font-size:40px;
+}
+
+.hero p{
 font-size:16px;
-outline:none;
 }
 
-/* PRODUCTS */
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:20px;
-}
-
-/* CARD */
-.card{
-background:#151515;
-border-radius:15px;
-overflow:hidden;
-transition:0.3s;
-border:1px solid #222;
-}
-
-.card:hover{
-transform:translateY(-8px);
-border-color:#00e676;
-}
-
-.card img{
-width:100%;
-height:230px;
-object-fit:cover;
-cursor:pointer;
-transition:0.3s;
-}
-
-.card img:hover{
-transform:scale(1.05);
-}
-
-.info{
-padding:15px;
-}
-
-.info h3{
-font-size:18px;
-margin-bottom:5px;
-}
-
-.price{
-color:#00e676;
-font-size:20px;
-font-weight:bold;
-margin:10px 0;
-}
-
-.btn-order{
-display:block;
-text-align:center;
-padding:12px;
-background:#25D366;
-color:white;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-transition:0.3s;
-}
-
-.btn-order:hover{
-background:#1ebe5d;
-transform:scale(1.03);
 }
 
 </style>
@@ -191,7 +139,7 @@ transform:scale(1.03);
 <body>
 
 <header>
-<div class="logo">👑 DE STORE</div>
+<div class="logo">👑 DE <span>STORE</span></div>
 </header>
 
 <section class="hero">
@@ -199,7 +147,10 @@ transform:scale(1.03);
 <div class="hero-content">
 
 <h1>أفضل متجر في الجزائر</h1>
-<p>منتجات عالية الجودة + توصيل لجميع الولايات</p>
+
+<p>
+منتجات أصلية + أسعار مناسبة + توصيل إلى 58 ولاية
+</p>
 
 <a href="#products" class="btn">ابدأ التسوق</a>
 
@@ -207,4 +158,5 @@ transform:scale(1.03);
 
 </section>
 
-<div class="container">
+</body>
+</html>
