@@ -323,7 +323,8 @@ box.innerHTML += `
 <img src="${p.image}" style="width:100%;border-radius:10px">
 <h3>${p.name}</h3>
 <p style="color:#00e676">${p.price} دج</p>
-<button style="width:100%;padding:10px;background:#00e676;border:none;border-radius:8px">
+<button onclick="openOrder('${p.name}',${p.price})"
+style="width:100%;padding:10px;background:#00e676;border:none;border-radius:8px">
 Commander
 </button>
 </div>
@@ -341,5 +342,30 @@ renderProducts();
 }
 
 renderProducts();
+
+</script>
+<script>
+
+function openOrder(name, price){
+
+let msg = `
+🛒 طلب جديد - DZ STORE
+
+📦 المنتج: ${name}
+💰 السعر: ${price} دج
+
+👤 الاسم: ضع اسمك هنا
+📞 الهاتف: ضع رقمك
+🏙 الولاية: ضع ولايتك
+📍 العنوان: ضع العنوان
+🔢 الكمية: 1
+`;
+
+window.open(
+"https://wa.me/213775123025?text=" + encodeURIComponent(msg),
+"_blank"
+);
+
+}
 
 </script>
