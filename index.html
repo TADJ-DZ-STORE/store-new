@@ -226,4 +226,120 @@ DZ STORE
 </div>
 
   </section>
-  
+  <!-- SEARCH -->
+<div style="text-align:center; padding:20px">
+
+<input id="searchInput"
+placeholder="ابحث عن منتج..."
+onkeyup="renderProducts()"
+style="padding:10px;width:80%;border-radius:10px;border:none">
+
+</div>
+
+<!-- CATEGORIES -->
+<div style="text-align:center">
+
+<button onclick="setCategory('all')">الكل</button>
+<button onclick="setCategory('electronics')">إلكترونيات</button>
+<button onclick="setCategory('home')">منزل</button>
+
+</div>
+
+<!-- PRODUCTS -->
+<h2 style="text-align:center;color:#00e676;margin-top:20px">
+المنتجات
+</h2>
+
+<div id="productsGrid"
+style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;padding:20px">
+</div>
+  <!-- SEARCH + CATEGORIES -->
+<section class="controls">
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج..." onkeyup="filterProducts()">
+</div>
+
+<div class="categories">
+<button onclick="setCategory('all')">الكل</button>
+<button onclick="setCategory('electronics')">إلكترونيات</button>
+<button onclick="setCategory('home')">منزل</button>
+<button onclick="setCategory('sport')">رياضة</button>
+<button onclick="setCategory('car')">سيارات</button>
+<button onclick="setCategory('beauty')">جمال</button>
+</div>
+
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+
+<h2 class="section-title">🔥 الأكثر مبيعًا</h2>
+
+<div class="products-grid" id="productsGrid"></div>
+
+</section>
+<script>
+
+let currentCategory = "all";
+
+const products = [
+{
+name:"Smart Watch",
+category:"electronics",
+price:3500,
+image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"
+},
+{
+name:"Headphones",
+category:"electronics",
+price:4500,
+image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500"
+},
+{
+name:"Blender",
+category:"home",
+price:5500,
+image:"https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=500"
+}
+];
+
+function renderProducts(){
+
+let box=document.getElementById("productsGrid");
+let search=document.getElementById("searchInput").value.toLowerCase();
+
+box.innerHTML="";
+
+products.forEach(p=>{
+
+if(
+(currentCategory==="all" || p.category===currentCategory) &&
+p.name.toLowerCase().includes(search)
+){
+
+box.innerHTML += `
+<div style="background:#111;padding:10px;border-radius:10px">
+<img src="${p.image}" style="width:100%;border-radius:10px">
+<h3>${p.name}</h3>
+<p style="color:#00e676">${p.price} دج</p>
+<button style="width:100%;padding:10px;background:#00e676;border:none;border-radius:8px">
+Commander
+</button>
+</div>
+`;
+
+}
+
+});
+
+}
+
+function setCategory(cat){
+currentCategory=cat;
+renderProducts();
+}
+
+renderProducts();
+
+</script>
