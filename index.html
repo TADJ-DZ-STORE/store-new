@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>👑 DZ STORE</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-<style>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"><title>👑 DZ STORE</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet"><style>
 
 *{
 margin:0;
@@ -18,43 +9,37 @@ box-sizing:border-box;
 font-family:'Cairo',sans-serif;
 }
 
-html{
-scroll-behavior:smooth;
-}
-
 body{
 background:#0f1115;
-color:#fff;
+color:white;
 overflow-x:hidden;
 }
 
 /* TOP BAR */
 
 .top-bar{
-background:#00d26a;
-color:#000;
-font-weight:700;
+background:#00e676;
+color:black;
 padding:10px;
 text-align:center;
-font-size:14px;
+font-weight:bold;
 }
 
 /* HEADER */
 
 header{
+background:#11151d;
+padding:15px;
+border-bottom:1px solid #222;
 position:sticky;
 top:0;
 z-index:999;
-background:#11151d;
-border-bottom:1px solid #1f2937;
-padding:15px;
 }
 
 .logo-box{
 display:flex;
 flex-direction:column;
 align-items:center;
-justify-content:center;
 }
 
 .logo-icon{
@@ -65,7 +50,6 @@ font-size:42px;
 font-size:28px;
 font-weight:800;
 color:#00e676;
-letter-spacing:2px;
 }
 
 /* NAV */
@@ -88,7 +72,7 @@ transition:.3s;
 
 .nav a:hover{
 background:#00e676;
-color:#000;
+color:black;
 }
 
 /* HERO */
@@ -122,8 +106,8 @@ position:absolute;
 inset:0;
 background:rgba(0,0,0,.45);
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 text-align:center;
 padding:20px;
 }
@@ -135,20 +119,18 @@ margin-bottom:10px;
 
 .hero-content p{
 font-size:18px;
-margin-bottom:20px;
 color:#ddd;
+margin-bottom:20px;
 }
 
 .hero-btn{
 background:#00e676;
-color:#000;
+color:black;
 padding:12px 25px;
 border-radius:10px;
 text-decoration:none;
 font-weight:bold;
 }
-
-/* SECTION TITLE */
 
 .section-title{
 text-align:center;
@@ -158,300 +140,24 @@ margin:40px 0 20px;
 color:#00e676;
 }
 
-</style>
-</head>
-<div id="orderModal"
-style="
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.8);
-justify-content:center;
-align-items:center;
-z-index:9999;
-">
-
-<div style="background:#111;padding:20px;border-radius:15px;width:90%;max-width:400px">
-
-<h2 style="color:#00e676;text-align:center">إتمام الطلب</h2>
-
-<input id="firstName" placeholder="الاسم" style="width:100%;padding:10px;margin:5px 0">
-<input id="lastName" placeholder="اللقب" style="width:100%;padding:10px;margin:5px 0">
-<input id="phone" placeholder="رقم الهاتف" style="width:100%;padding:10px;margin:5px 0">
-
-<select id="wilaya" style="width:100%;padding:10px;margin:5px 0">
-<option>الجزائر</option>
-<option>سطيف</option>
-<option>وهران</option>
-<option>قسنطينة</option>
-<option>باتنة</option>
-<option>بجاية</option>
-<option>عنابة</option>
-</select>
-
-<input id="qty" type="number" value="1" min="1" style="width:100%;padding:10px;margin:5px 0">
-
-<select id="delivery" style="width:100%;padding:10px;margin:5px 0">
-<option>توصيل عادي</option>
-<option>توصيل سريع</option>
-<option>استلام من المكتب</option>
-</select>
-
-<button onclick="sendOrder()"
-style="width:100%;padding:10px;background:#00e676;border:none;border-radius:8px">
-إرسال الطلب
-</button>
-
-<button onclick="closeOrder()"
-style="width:100%;margin-top:5px;padding:10px;background:red;color:white;border:none;border-radius:8px">
-إغلاق
-</button>
-
-</div>
-</div>
-<body>
-
-<div class="top-bar">
+</style></head><body><div class="top-bar">
 🚚 توصيل إلى 58 ولاية | 💵 الدفع عند الاستلام | ✅ منتجات مختارة بعناية
-</div>
-
-<header>
-
-<div class="logo-box">
-
-<div class="logo-icon">👑</div>
-
-<div class="logo-text">
+</div><header><div class="logo-box"><div class="logo-icon">👑</div><div class="logo-text">
 DZ STORE
-</div>
-
-</div>
-
-<div class="nav">
-
-<a href="#products">المنتجات</a>
-
-<a href="#categories">التصنيفات</a>
+</div></div><div class="nav"><a href="#products">المنتجات</a>
 
 <a href="#about">من نحن</a>
 
 <a href="#contact">اتصل بنا</a>
 
-</div>
-
-</header>
-
-<section class="hero">
-
-<div class="slide active">
+</div></header><section class="hero"><div class="slide active">
 <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1400">
-</div>
-
-<div class="slide">
+</div><div class="slide">
 <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1400">
-</div>
-
-<div class="slide">
+</div><div class="slide">
 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1400">
-</div>
-
-<div class="overlay">
-
-<div class="hero-content">
-
-<h1>مرحباً بك في DZ STORE</h1>
-
-<p>
+</div><div class="overlay"><div class="hero-content"><h1>مرحباً بك في DZ STORE</h1><p>
 أفضل العروض والمنتجات مع التوصيل إلى جميع ولايات الجزائر
-</p>
-
-<a href="#products" class="hero-btn">
+</p><a href="#products" class="hero-btn">
 تسوق الآن
-</a>
-
-</div>
-
-</div>
-
-  </section>
-  <!-- SEARCH -->
-<div style="text-align:center; padding:20px">
-
-<input id="searchInput"
-placeholder="ابحث عن منتج..."
-onkeyup="renderProducts()"
-style="padding:10px;width:80%;border-radius:10px;border:none">
-
-</div>
-
-<!-- CATEGORIES -->
-<div style="text-align:center">
-
-<button onclick="setCategory('all')">الكل</button>
-<button onclick="setCategory('electronics')">إلكترونيات</button>
-<button onclick="setCategory('home')">منزل</button>
-
-</div>
-
-<!-- PRODUCTS -->
-<h2 style="text-align:center;color:#00e676;margin-top:20px">
-المنتجات
-</h2>
-
-<div id="productsGrid"
-style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;padding:20px">
-</div>
-  <!-- SEARCH + CATEGORIES -->
-<section class="controls">
-
-<div class="search-box">
-<input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج..." onkeyup="filterProducts()">
-</div>
-
-<div class="categories">
-<button onclick="setCategory('all')">الكل</button>
-<button onclick="setCategory('electronics')">إلكترونيات</button>
-<button onclick="setCategory('home')">منزل</button>
-<button onclick="setCategory('sport')">رياضة</button>
-<button onclick="setCategory('car')">سيارات</button>
-<button onclick="setCategory('beauty')">جمال</button>
-</div>
-
-</section>
-
-<!-- PRODUCTS -->
-<section id="products">
-
-<h2 class="section-title">🔥 الأكثر مبيعًا</h2>
-
-<div class="products-grid" id="productsGrid"></div>
-
-</section>
-<script>
-
-let currentCategory = "all";
-
-const products = [
-{
-name:"Smart Watch",
-category:"electronics",
-price:3500,
-image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"
-},
-{
-name:"Headphones",
-category:"electronics",
-price:4500,
-image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500"
-},
-{
-name:"Blender",
-category:"home",
-price:5500,
-image:"https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=500"
-}
-];
-
-function renderProducts(){
-
-let box=document.getElementById("productsGrid");
-let search=document.getElementById("searchInput").value.toLowerCase();
-
-box.innerHTML="";
-
-products.forEach(p=>{
-
-if(
-(currentCategory==="all" || p.category===currentCategory) &&
-p.name.toLowerCase().includes(search)
-){
-
-box.innerHTML += `
-<div style="background:#111;padding:10px;border-radius:10px">
-<img src="${p.image}" style="width:100%;border-radius:10px">
-<h3>${p.name}</h3>
-<p style="color:#00e676">${p.price} دج</p>
-<button onclick="openOrder('${p.name}',${p.price})">
-Commander
-</button>
-</div>
-`;
-
-}
-
-});
-
-}
-
-function setCategory(cat){
-currentCategory=cat;
-renderProducts();
-}
-
-renderProducts();
-
-</script>
-<script>
-
-function openOrder(name, price){
-
-let msg = `
-🛒 طلب جديد - DZ STORE
-
-📦 المنتج: ${name}
-💰 السعر: ${price} دج
-
-👤 الاسم: ضع اسمك هنا
-📞 الهاتف: ضع رقمك
-🏙 الولاية: ضع ولايتك
-📍 العنوان: ضع العنوان
-🔢 الكمية: 1
-`;
-
-window.open(
-"https://wa.me/213775123025?text=" + encodeURIComponent(msg),
-"_blank"
-);
-
-}
-
-</script>
-let selectedProduct = "";
-let selectedPrice = 0;
-
-function openOrder(name, price){
-selectedProduct = name;
-selectedPrice = price;
-document.getElementById("orderModal").style.display="flex";
-}
-
-function closeOrder(){
-document.getElementById("orderModal").style.display="none";
-}
-
-function sendOrder(){
-
-let first = document.getElementById("firstName").value;
-let last = document.getElementById("lastName").value;
-let phone = document.getElementById("phone").value;
-let wilaya = document.getElementById("wilaya").value;
-let qty = document.getElementById("qty").value;
-let delivery = document.getElementById("delivery").value;
-
-let msg =
-`🛒 طلب جديد - DZ STORE
-
-📦 المنتج: ${selectedProduct}
-💰 السعر: ${selectedPrice} دج
-
-👤 الاسم: ${first} ${last}
-📞 الهاتف: ${phone}
-🏙 الولاية: ${wilaya}
-🚚 طريقة التوصيل: ${delivery}
-🔢 الكمية: ${qty}`;
-
-window.open(
-"https://wa.me/213775123025?text=" + encodeURIComponent(msg),
-"_blank"
-);
-}
+</a></div></div></section>
