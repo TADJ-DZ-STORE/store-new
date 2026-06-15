@@ -472,6 +472,8 @@ style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
 <option>استلام من المكتب</option></select><!-- الكمية --><label style="color:white;font-weight:bold">الكمية</label>
 
 <select id="qty"
+  <select id="qty" onchange="updatePrice()"
+style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
 style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
 
 <option value="1">1</option>
@@ -541,7 +543,21 @@ description:"خلاط قوي لتحضير العصائر بسرعة وسهولة
 image:"https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=500"
 }
 ];
+function updateTotalPrice(){
 
+let qty = parseInt(document.getElementById("qty").value) || 1;
+
+let productTotal = selectedPrice * qty;
+
+let deliveryPrice = 600;
+
+document.getElementById("productPriceDisplay").innerText =
+productTotal + " دج";
+
+document.getElementById("totalPriceDisplay").innerText =
+(productTotal + deliveryPrice) + " دج";
+
+  }
 /* =======================
    RENDER PRODUCTS
 ======================= */
@@ -619,7 +635,8 @@ document.getElementById("modalOrderBtn").onclick = function(){
 openOrder(index);
 closeProduct();
 };
-
+document.getElementById("qty").value = 1;
+updateTotalPrice();
 document.getElementById("productModal").style.display = "flex";
 }
 
