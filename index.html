@@ -366,3 +366,94 @@ Commander
 </button>
 
 </div></div></div>
+<!-- ORDER MODAL --><div id="orderModal"
+style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+z-index:10000;
+justify-content:center;
+align-items:center;
+padding:20px;
+"><div style="
+background:#111826;
+width:100%;
+max-width:500px;
+border-radius:18px;
+padding:20px;
+position:relative;
+"><!-- إغلاق --><button onclick="closeOrder()"
+style="
+position:absolute;
+top:10px;
+left:10px;
+width:40px;
+height:40px;
+border:none;
+border-radius:50%;
+background:red;
+color:white;
+font-size:18px;
+cursor:pointer;
+">
+✕
+</button>
+
+<h2 style="text-align:center;color:#00e676;margin-bottom:15px">
+إتمام الطلب
+</h2><!-- الاسم --><input id="firstName"
+placeholder="الاسم"
+style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
+
+<!-- اللقب --><input id="lastName"
+placeholder="اللقب"
+style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
+
+<!-- الهاتف --><input id="phone"
+placeholder="رقم الهاتف"
+style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
+
+<!-- الولاية --><select id="wilaya"
+style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
+
+<option>الجزائر</option>
+<option>سطيف</option>
+<option>وهران</option>
+<option>قسنطينة</option>
+<option>باتنة</option>
+<option>عنابة</option>
+<option>بجاية</option></select><!-- البلدية --><input id="commune"
+placeholder="البلدية"
+style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
+
+<!-- العنوان --><input id="address"
+placeholder="العنوان الكامل"
+style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
+
+<!-- التوصيل --><select id="delivery"
+style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
+
+<option>توصيل عادي</option>
+<option>توصيل سريع</option>
+<option>استلام من المكتب</option></select><!-- الكمية --><input id="qty"
+type="number"
+min="1"
+value="1"
+style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
+
+<!-- زر الإرسال --><button onclick="sendOrder()"
+style="
+width:100%;
+padding:12px;
+background:#00e676;
+border:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:10px;
+cursor:pointer;
+">
+إرسال الطلب عبر واتساب
+</button>
+
+</div></div>
