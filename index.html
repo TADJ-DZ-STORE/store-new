@@ -785,7 +785,25 @@ document.getElementById("adminPanel").style.display = "none";
 
 function checkAdmin(){
 let pass = document.getElementById("adminPass").value;
+function addProduct(){
+let name = document.getElementById("pname").value;
+let price = document.getElementById("pprice").value;
+let image = document.getElementById("pimage").value;
+let cat = document.getElementById("pcat").value;
+let desc = document.getElementById("pdesc").value;
 
+products.push({
+name:name,
+price:Number(price),
+image:image,
+category:cat,
+description:desc
+});
+
+renderProducts();
+
+alert("تم إضافة المنتج بنجاح");
+  }
 if(pass === ADMIN_PASSWORD){
 document.getElementById("loginBox").style.display = "none";
 document.getElementById("panel").style.display = "block";
