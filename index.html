@@ -511,3 +511,185 @@ cursor:pointer;
 </button>
 
 </div></div>
+<script>
+
+let currentCategory = "all";
+let selectedProduct = "";
+let selectedPrice = 0;
+let selectedDesc = "";
+let selectedImage = "";
+
+/* =======================
+   PRODUCTS DATA
+======================= */
+
+const products = [
+{
+name:"Smart Watch",
+category:"electronics",
+price:3500,
+description:"ساعة ذكية بشاشة لمس، قياس نبضات القلب، وإشعارات الهاتف.",
+image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"
+},
+{
+name:"Headphones",
+category:"electronics",
+price:4500,
+description:"سماعات لاسلكية بصوت عالي الجودة وبطارية قوية.",
+image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500"
+},
+{
+name:"Blender",
+category:"home",
+price:5500,
+description:"خلاط قوي لتحضير العصائر بسرعة وسهولة.",
+image:"https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=500"
+}
+];
+
+/* =======================
+   RENDER PRODUCTS
+======================= */
+
+function renderProducts(){
+
+let box = document.getElementById("productsGrid");
+let search = document.getElementById("searchInput").value.toLowerCase();
+
+box.innerHTML = "";
+
+products.forEach((p,index)=>{
+
+if(
+(currentCategory === "all" || p.category === currentCategory) &&
+p.name.toLowerCase().includes(search)
+){
+
+box.innerHTML += `
+
+<div class="product-card">
+
+<img src="${p.image}"
+onclick="openProduct(${index})">
+
+<div class="product-info">
+
+<div class="product-name">${p.name}</div>
+
+<div class="product-price">${p.price} دج</div>
+
+<button class="command-btn"
+onclick="openOrder(${index})">
+Commander
+</button>
+
+</div>
+
+</div>
+
+`;
+}
+
+});
+
+}
+
+/* =======================
+   CATEGORY
+======================= */
+
+function setCategory(cat){
+currentCategory = cat;
+renderProducts();
+}
+
+/* =======================
+   OPEN PRODUCT (ZOOM)
+======================= */
+
+function openProduct(index){
+
+selectedProduct = products[index].name;
+selectedPrice = products[index].price;
+selectedDesc = products[index].description;
+selectedImage = products[index].image;
+
+document.getElementById("modalImage").src = selectedImage;
+document.getElementById("modalName").innerText = selectedProduct;
+document.getElementById("modalDesc").innerText = selectedDesc;
+document.getElementById("modalPrice").innerText = selectedPrice + " دج";
+
+/* زر Commander داخل نافذة المنتج */
+document.getElementById("modalOrderBtn").onclick = function(){
+openOrder(index);
+closeProduct();
+};
+
+document.getElementById("productModal").style.display = "flex";
+}
+
+function closeProduct(){
+document.getElementById("productModal").style.display = "none";
+}
+
+/* =======================
+   ORDER MODAL
+======================= */
+
+function openOrder(index){
+
+selectedProduct = products[index].name;
+selectedPrice = products[index].price;
+
+document.getElementById("orderModal").style.display = "flex";
+}
+
+function closeOrder(){
+document.getElementById("orderModal").style.display = "none";
+}
+
+/* =======================
+   SEND TO WHATSAPP
+======================= */
+
+function sendOrder(){
+
+let first = document.getElementById("firstName").value;
+let last = document.getElementById("lastName").value;
+let phone = document.getElementById("phone").value;
+let wilaya = document.getElementById("wilaya").value;
+let commune = document.getElementById("commune").value;
+let address = document.getElementById("address").value;
+let delivery = document.getElementById("delivery").value;
+let qty = document.getElementById("qty").value;
+
+let msg = `🛒 طلب جديد - DZ STORE
+
+📦 المنتج: ${selectedProduct}
+💰 السعر: ${selectedPrice} دج
+
+👤 الاسم: ${first} ${last}
+📞 الهاتف: ${phone}
+
+🏙 الولاية: ${wilaya}
+🏘 البلدية: ${commune}
+📍 العنوان: ${address}
+
+🚚 التوصيل: ${delivery}
+🔢 الكمية: ${qty}
+`;
+
+window.open(
+"https://wa.me/213775123025?text=" + encodeURIComponent(msg),
+"_blank"
+);
+
+}
+
+/* =======================
+   INIT
+======================= */
+
+renderProducts();
+
+</script>
