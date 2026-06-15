@@ -476,14 +476,8 @@ style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none">
 </label>
 
 <select id="qty" 
-onchange="updateTotalPrice()">
-style="
-width:100%;
-padding:10px;
-margin:5px 0;
-border-radius:8px;
-border:none;
-">
+onchange="updateTotalPrice()"
+style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:none;">
 
 <option value="1">1 قطعة</option>
 <option value="2">2 قطع</option>
@@ -544,6 +538,7 @@ description:"خلاط قوي لتحضير العصائر بسرعة وسهولة
 image:"https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=500"
 }
 ];
+  
 function updateTotalPrice(){
 
 let qty = parseInt(document.getElementById("qty").value) || 1;
@@ -557,8 +552,7 @@ productTotal + " دج";
 document.getElementById("totalPriceDisplay").innerText =
 total + " دج";
 
-  }
-];
+}
 
 /* =======================
    RENDER PRODUCTS
